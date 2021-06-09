@@ -46,17 +46,14 @@ describe('#Drum Machine tests', function () {
       const wrapper = shallow(<App />);
 
       const drumPadElements = wrapper.find(".drum-pad");
-      let drumPadInnerText = [];
       const requiredLetters = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
 
       expect(drumPadElements.length >= 9, "There should be at least 9 elements with the class .drum-pad").to.equal(true);
 
-      drumPadElements.forEach(elem => {
+      drumPadElements.forEach((elem, i) => {
         expect(elem).to.have.attr('id');
-        drumPadInnerText.push(elem.innerText.replace(/\s/g, ''));
+        expect(elem).to.have.text(requiredLetters[i]);
       });
-
-      expect(drumPadInnerText).to.include.members(requiredLetters);
     });
 
     it(`Within each .drum-pad, there should be an HTML5 <audio>
@@ -71,13 +68,13 @@ describe('#Drum Machine tests', function () {
       expect(drumPadElements.length >= 9, "There should be at least 9 elements with the class .drum-pad").to.equal(true);
 
       drumPadElements.forEach((elem, index) => {
-        expect(elem.exists(".clip"), `#clip is not defined in drum pad ${index}`).to.equal(true);
+        expect(elem.exists(".clip"), `.clip is not defined in drum pad ${index}`).to.equal(true);
         let clipElem = elem.find(".clip");
         expect(clipElem).to.have.tagName("audio");
         expect(clipElem).to.have.attr('src');
         expect(clipElem).to.have.id();
         expect(clipElem.id).to.equal(clipElem.parentElement.innerText.replace(/\s/g, ''));
-      })
+      });
     });
 
     it(`When I click on a .drum-pad element, the audio clip
@@ -89,13 +86,13 @@ describe('#Drum Machine tests', function () {
       expect(drumPadElements.length >= 9, "There should be at least 9 elements with the class .drum-pad").to.equal(true);
 
       drumPadElements.forEach((elem, index) => {
-        expect(elem.exists(".clip"), `#clip is not defined in drum pad ${index}`).to.equal(true);
+        expect(elem.exists(".clip"), `.clip is not defined in drum pad ${index}`).to.equal(true);
         let clipElem = elem.find(".clip");
         expect(clipElem).to.have.tagName("audio");
         expect(clipElem).to.have.attr('src');
         expect(clipElem).to.have.id();
         expect(clipElem.id).to.equal(clipElem.parentElement.innerText.replace(/\s/g, ''));
-      })
+      });
       
       /*
       assert.isAtLeast(
@@ -130,13 +127,13 @@ describe('#Drum Machine tests', function () {
       expect(drumPadElements.length >= 9, "There should be at least 9 elements with the class .drum-pad").to.equal(true);
 
       drumPadElements.forEach((elem, index) => {
-        expect(elem.exists(".clip"), `#clip is not defined in drum pad ${index}`).to.equal(true);
+        expect(elem.exists(".clip"), `.clip is not defined in drum pad ${index}`).to.equal(true);
         let clipElem = elem.find(".clip");
         expect(clipElem).to.have.tagName("audio");
         expect(clipElem).to.have.attr('src');
         expect(clipElem).to.have.id();
         expect(clipElem.id).to.equal(clipElem.parentElement.innerText.replace(/\s/g, ''));
-      })
+      });
 
       /*
       const keyCodes = [81, 87, 69, 65, 83, 68, 90, 88, 67];
@@ -170,13 +167,13 @@ describe('#Drum Machine tests', function () {
       expect(drumPadElements.length >= 9, "There should be at least 9 elements with the class .drum-pad").to.equal(true);
 
       drumPadElements.forEach((elem, index) => {
-        expect(elem.exists(".clip"), `#clip is not defined in drum pad ${index}`).to.equal(true);
+        expect(elem.exists(".clip"), `.clip is not defined in drum pad ${index}`).to.equal(true);
         let clipElem = elem.find(".clip");
         expect(clipElem).to.have.tagName("audio");
         expect(clipElem).to.have.attr('src');
         expect(clipElem).to.have.id();
         expect(clipElem.id).to.equal(clipElem.parentElement.innerText.replace(/\s/g, ''));
-      })
+      });
 
       /*
       let displayText = [];
