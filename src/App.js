@@ -9,7 +9,9 @@ class App extends React.Component {
   render = () => {
     return (
       <div className="App">
-        <div id="drum-machine"></div>
+        <div id="drum-machine">
+          <div id="display"></div>
+        </div>
       </div>
     );
   };
