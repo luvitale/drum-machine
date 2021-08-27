@@ -1,10 +1,16 @@
 import './App.css';
 import DrumPad from './components/DrumPad.js';
+import Display from './components/Display.js';
 import React from 'react';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      displayText: 'Click a drum pad to play sound'
+    }
+    this.changeDisplayText = this.changeDisplayText.bind(this);
+    this.clearDisplay = this.clearDisplay.bind(this)
   };
 
   render = () => {
@@ -21,24 +27,42 @@ class App extends React.Component {
     ];
 
     const drumPads = drumPadsInfo.map(elem => {
-            return (
-              <DrumPad
-                letter={elem.letter}
-                audio={elem.audio}
-              />
-            );
+      return (
+        <DrumPad
+          letter={elem.letter}
+          audio={elem.audio}
+          updateDisplay={this.changeDisplayText}
+        />
+      );
     })
 
     return (
       <div className="App">
         <div id="drum-machine">
-          <div id="display"></div>
+          <Display id="display" displayText={this.state.displayText} />
 
           {drumPads}
         </div>
       </div>
     );
   };
+
+  changeDisplayText(message, duration) {
+    this.setState({
+      displayText: message
+    })
+
+    setTimeout(
+      () => this.clearDisplay(),
+      duration
+    )
+  }
+
+  clearDisplay() {
+    this.setState({
+      displayText: ""
+    })
+  }
 }
 
 export default App;
