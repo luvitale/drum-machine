@@ -4,7 +4,17 @@ class DrumPad extends React.Component {
   constructor(props) {
     super(props);
     this.playSound = this.playSound.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown)
+    window.focus()
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown)
+  }
 
   render() {
     const {letter, audio} = this.props;
@@ -30,8 +40,15 @@ class DrumPad extends React.Component {
     this.audioPlayer.currentTime = 0
     this.audioPlayer.play()
     
-    const DURATION = 1000
+    const DURATION = 1600
     this.props.updateDisplay(this.props.letter, DURATION)
+  }
+
+  handleKeyDown(event) {
+    console.log(event)
+    if (event.key.toUpperCase() === this.props.letter) {
+      this.playSound()
+    }
   }
 }
 

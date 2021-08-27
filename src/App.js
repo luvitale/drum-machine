@@ -29,6 +29,7 @@ class App extends React.Component {
     const drumPads = drumPadsInfo.map(elem => {
       return (
         <DrumPad
+          key={elem.letter}
           letter={elem.letter}
           audio={elem.audio}
           updateDisplay={this.changeDisplayText}
@@ -37,9 +38,9 @@ class App extends React.Component {
     })
 
     return (
-      <div className="App">
+      <div>
         <div id="drum-machine">
-          <Display id="display" displayText={this.state.displayText} />
+          <Display displayText={this.state.displayText} />
 
           {drumPads}
         </div>
